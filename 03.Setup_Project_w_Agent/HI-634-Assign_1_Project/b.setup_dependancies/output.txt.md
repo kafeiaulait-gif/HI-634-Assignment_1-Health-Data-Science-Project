@@ -53,9 +53,11 @@ import numpy as np
 import matplotlib
 import seaborn as sns
 import sklearn
+
 print('=== Python Path & Executable ===')
 print('sys.executable:', sys.executable)
 print('sys.prefix:    ', sys.prefix)
+
 print('\n=== Package Versions ===')
 print('pandas:       ', pd.__version__)
 print('numpy:        ', np.__version__)
