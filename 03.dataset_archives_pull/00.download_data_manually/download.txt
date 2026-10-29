@@ -1,0 +1,20 @@
+
+* Open the UCI page, select Download, and extract the archive into data/raw/heart.
+
+https://archive.ics.uci.edu/static/public/45/heart%2Bdisease.zip
+
+
+---
+
+* Unzip *.zip file.
+
+
+---
+
+* Copy the 'processed.cleveland.data' to:
+
+	..\project\HI-634-Assign_1_Project\data\raw\heart
+	
+
+
+
