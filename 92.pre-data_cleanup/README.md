@@ -52,32 +52,32 @@ A modular Python toolkit developed for data acquisition, batch ingestion, and au
 
 #### 1. Analyze a local file and record its provenance Source URL
 ```bash
-python3 data_profiler.py myfile.csv --source-url "https://archive.ics.uci.edu/dataset/45/heart+disease"
+python data_profiler.py myfile.csv --source-url "https://archive.ics.uci.edu/dataset/45/heart+disease"
 ```
 
 #### 2. Download and analyze directly from a remote URL
 ```bash
-python3 data_profiler.py --url "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+python data_profiler.py --url "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
 ```
 
 #### 3. Analyze multiple files or an entire directory in batch
 ```bash
 # Profile all supported data files in a folder
-python3 data_profiler.py source_dir/
+python data_profiler.py source_dir/
 
 # Profile specific files together (generates side-by-side comparison table)
-python3 data_profiler.py cleveland.data hungarian.data switzerland.data va.data --uci-heart
+python data_profiler.py cleveland.data hungarian.data switzerland.data va.data --uci-heart
 ```
 
 #### 4. Save JSON machine-readable metrics alongside Markdown
 ```bash
-python3 data_profiler.py dataset.csv --json
+python data_profiler.py dataset.csv --json
 ```
 
 #### 5. Interactive prompt & `.env` fallback
 If invoked with no arguments:
 ```bash
-python3 data_profiler.py
+python data_profiler.py
 ```
 The script will check `.env` for `DATA_FILES`, `SOURCE_FILES`, or `SOURCE_FOLDER` definitions, or interactively prompt for the file path and optional source URL.
 
@@ -89,12 +89,12 @@ Many research datasets (such as UCI `.data` files) do not include column headers
 
 - **Custom column names via CLI:**
   ```bash
-  python3 data_profiler.py data.txt --columns "age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,num"
+  python data_profiler.py data.txt --columns "age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,num"
   ```
 - **Built-in UCI Heart Disease preset (`--uci-heart`):**
   Applies the 14 standard attributes (`age`, `sex`, `cp`, `trestbps`, `chol`, `fbs`, `restecg`, `thalach`, `exang`, `oldpeak`, `slope`, `ca`, `thal`, `num`).
   ```bash
-  python3 data_profiler.py processed.cleveland.data --uci-heart
+  python data_profiler.py processed.cleveland.data --uci-heart
   ```
 - **Automatic `.names` file discovery:**
   If a corresponding `<dataset>.names` file is in the same directory, the profiler automatically parses attribute names if custom columns are not explicitly supplied.
@@ -270,22 +270,22 @@ Every curation run generates an AI-ready staging folder:
 
 #### 1. Curate all files in a source directory with UCI Heart Disease preset
 ```bash
-python3 data_curator.py source_dir/ --uci-heart --output-dir staged_data/
+python data_curator.py source_dir/ --uci-heart --output-dir staged_data/
 ```
 
 #### 2. Curate specific dataset files with target stratification and class balancing
 ```bash
-python3 data_curator.py cleveland.data hungarian.data --target-col num --augment balance --output-dir staged_data/
+python data_curator.py cleveland.data hungarian.data --target-col num --augment balance --output-dir staged_data/
 ```
 
 #### 3. Curate clinical patient records with PII redaction and fuzzy entity resolution
 ```bash
-python3 data_curator.py patients.csv --entity-keys "full_name" --dedup-keys "patient_id" --phi-redact --scale-method standard
+python data_curator.py patients.csv --entity-keys "full_name" --dedup-keys "patient_id" --phi-redact --scale-method standard
 ```
 
 #### 4. Run automated test suite
 ```bash
-python3 test_data_curator.py
+python test_data_curator.py
 ```
 
 ---

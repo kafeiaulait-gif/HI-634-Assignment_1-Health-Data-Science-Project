@@ -13,12 +13,8 @@ A modular Python toolkit developed for data acquisition, batch ingestion, and au
    - [Domain Presets & Headerless Data](#domain-presets--headerless-data)
    - [Generated Deliverables & Reports](#generated-deliverables--reports)
    - [Sample Console Report](#sample-console-report)
-2. [Dataset Batch Copy Utility (`copy_file.py`)](#2-dataset-batch-copy-utility-copyfilepy)
-   - [Overview](#overview-1)
-   - [Configuration (`.env`)](#configuration-env)
-   - [Key Features](#key-features)
-   - [Logging Configuration](#logging-configuration)
-3. [Repository File Inventory](#3-repository-file-inventory)
+
+2. [Repository File Inventory](#3-repository-file-inventory)
 
 ---
 
@@ -46,32 +42,32 @@ A modular Python toolkit developed for data acquisition, batch ingestion, and au
 
 #### 1. Analyze a local file and record its provenance Source URL
 ```bash
-python3 data_profiler.py myfile.csv --source-url "https://archive.ics.uci.edu/dataset/45/heart+disease"
+python data_profiler.py myfile.csv --source-url "https://archive.ics.uci.edu/dataset/45/heart+disease"
 ```
 
 #### 2. Download and analyze directly from a remote URL
 ```bash
-python3 data_profiler.py --url "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+python data_profiler.py --url "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
 ```
 
 #### 3. Analyze multiple files or an entire directory in batch
 ```bash
 # Profile all supported data files in a folder
-python3 data_profiler.py source_dir/
+python data_profiler.py source_dir/
 
 # Profile specific files together (generates side-by-side comparison table)
-python3 data_profiler.py cleveland.data hungarian.data switzerland.data va.data --uci-heart
+python data_profiler.py cleveland.data hungarian.data switzerland.data va.data --uci-heart
 ```
 
 #### 4. Save JSON machine-readable metrics alongside Markdown
 ```bash
-python3 data_profiler.py dataset.csv --json
+python data_profiler.py dataset.csv --json
 ```
 
 #### 5. Interactive prompt & `.env` fallback
 If invoked with no arguments:
 ```bash
-python3 data_profiler.py
+python data_profiler.py
 ```
 The script will check `.env` for `DATA_FILES`, `SOURCE_FILES`, or `SOURCE_FOLDER` definitions, or interactively prompt for the file path and optional source URL.
 
@@ -83,12 +79,12 @@ Many research datasets (such as UCI `.data` files) do not include column headers
 
 - **Custom column names via CLI:**
   ```bash
-  python3 data_profiler.py data.txt --columns "age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,num"
+  python data_profiler.py data.txt --columns "age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,num"
   ```
 - **Built-in UCI Heart Disease preset (`--uci-heart`):**
   Applies the 14 standard attributes (`age`, `sex`, `cp`, `trestbps`, `chol`, `fbs`, `restecg`, `thalach`, `exang`, `oldpeak`, `slope`, `ca`, `thal`, `num`).
   ```bash
-  python3 data_profiler.py processed.cleveland.data --uci-heart
+  python data_profiler.py processed.cleveland.data --uci-heart
   ```
 - **Automatic `.names` file discovery:**
   If a corresponding `<dataset>.names` file is in the same directory, the profiler automatically parses attribute names if custom columns are not explicitly supplied.
