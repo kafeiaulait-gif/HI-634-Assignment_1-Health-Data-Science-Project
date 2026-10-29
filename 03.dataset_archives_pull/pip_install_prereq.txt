@@ -1,3 +1,7 @@
 
-pip install ucimlrepo
+# pip install ucimlrepo
+# pip install scikit-learn
+
+pip install ucimlrepo pandas scikit-learn
+
 
