@@ -1,0 +1,7 @@
+
+Ask AI agent for all of the output created today and for it to be exported into a .md file named:
+
+> prompt_output.md
+
+
+
