@@ -1,0 +1,40 @@
+I would like to write a quick Python script that will take a file that is in one folder and make a copy of the file in another folder.  I would like for it to use a .env file to store the source file name, source folder, and target folder.  Also, have a flag that is Y/N that allows the script to rename the file in the target location; with a parameter for the target file name.  If the file already exist in the target, it prompts with a Y/N to overwrite the target file.  If N, then a try..exception block catches the error with a friendly message.
+
+I have created the Python script, configuration files, and a sample working directory.
+
+Created Files
++ copy_file.py — The Python script handling the file copy, renaming flag, overwrite prompt, and exception handling.
++ .env — Configuration file storing directories, filenames, and flags.
++ .env.example — Template configuration file.
++ README.md — Documentation and usage instructions.
+
+
+- Configuration File (.env)
+
+- Key Script Logic (copy_file.py)
+
+- Running the Script
+
+	Run the script from your terminal:
+
+bash
+> python3 copy_file.py
+
++ When the file does not exist in target: Copies the file directly.
++ When the file exists in target: Asks Do you want to overwrite it? (Y/N):
+	- Entering N: Raises FileExistsError, which is caught by the try..except block to display a friendly notice without modifying the target file.
+	- Entering Y: Overwrites the file cleanly.
+	
+	
+
+So in Windows, the script lives in this folder:  T:\HI_634\Project_Assignments\Project_01\HI-634-Assignment_1-Health-Data-Science-Project\03.dataset_copy.  However, the source file lives in this folder:  T:\HI_634\Project_Assignments\Project_01\HI-634-Assignment_1-Health-Data-Science-Project\source_datafiles\heart+disease.  And the target is:  T:\HI_634\Project_Assignments\Project_01\HI-634-Assignment_1-Health-Data-Science-Project\project\data\raw.  Can you provide the best .evn for these paths?  Also, is there a way to make the paths relative; so the it doesn't depend on teh T: drive?
+
+So I found a critical issue.  There is more than one source dataset file to copy.  It appears that each of the data files have an extension of .data.  In the .env, can we change the SOURCE_FILE to a list of files, separated by ';' and the script the tranvers through the SOURCE_FOLDER and copy each of the files that are in the list, but also have an extension of .data?
+
+I forgot to add one other thing.  Can you add logging to a file?  The path for the log would be the same as where the script lives and the log file name would be a CONSTANT defined in the Python file.
+
+
+
+
+
+
