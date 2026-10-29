@@ -8,6 +8,8 @@ from pathlib import Path
 # CONSTANTS
 # ==============================================================================
 LOG_FILE_NAME = "dataset_copy.log"
+# Allowed file extensions for validation and wildcard lookups
+ALLOWED_EXTENSIONS = (".data", ".txt", ".csv")
 
 
 def setup_logger(log_file_path: Path) -> logging.Logger:
@@ -64,7 +66,7 @@ def load_env_file(dotenv_path: Path | str = ".env") -> None:
 def copy_dataset_files():
     """
     Traverses the source folder and copies dataset files specified in .env.
-    Filters files requiring a '.data' extension, supports optional renaming,
+    Filters files requiring .data, .txt, or .csv extensions, supports optional renaming,
     protects against overwrites using interactive confirmation, and logs all
     operations to a log file defined by LOG_FILE_NAME.
     """
@@ -125,25 +127,30 @@ def copy_dataset_files():
     # 3. Parse source files list (semicolon-separated or wildcard)
     raw_requested_files = [f.strip() for f in source_files_raw.split(";") if f.strip()]
 
-    # If user specified "*.data" or "*", automatically grab all .data files from source_folder
-    if len(raw_requested_files) == 1 and raw_requested_files[0] in ("*", "*.data"):
-        valid_requested_files = sorted([
-            f.name for f in source_dir_path.glob("*.data") if f.is_file()
-        ])
+    # Check if a global wildcard is requested, or if it matches any pattern of our allowed formats
+    wildcard_options = ("*", "*.data", "*.txt", "*.csv")
+    if len(raw_requested_files) == 1 and raw_requested_files[0] in wildcard_options:
+        matched_files = []
+        # Pull matching paths across all allowed extensions
+        for ext in ALLOWED_EXTENSIONS:
+            matched_files.extend([f.name for f in source_dir_path.glob(f"*{ext}") if f.is_file()])
+        valid_requested_files = sorted(list(set(matched_files)))
         logger.info(f"Wildcard '{raw_requested_files[0]}' matched files: {valid_requested_files}")
     else:
-        # 4. Filter list for files that explicitly end with '.data'
+        # 4. Filter list for files that explicitly end with valid extensions
         valid_requested_files = []
         for fname in raw_requested_files:
-            if fname.lower().endswith(".data"):
+            if fname.lower().endswith(ALLOWED_EXTENSIONS):
                 valid_requested_files.append(fname)
             else:
-                msg = f"Skipping '{fname}': Does not have the required '.data' extension."
+                extensions_str = ", ".join(ALLOWED_EXTENSIONS)
+                msg = f"Skipping '{fname}': Does not have a required extension ({extensions_str})."
                 logger.info(msg)
                 print(f"[Notice] {msg}")
 
     if not valid_requested_files:
-        msg = "No files in the list have the required '.data' extension."
+        extensions_str = ", ".join(ALLOWED_EXTENSIONS)
+        msg = f"No files in the list have the required extensions ({extensions_str})."
         logger.error(msg)
         print(f"[Error] {msg}")
         sys.exit(1)
@@ -157,7 +164,7 @@ def copy_dataset_files():
         if len(raw_target_files) != len(valid_requested_files):
             msg = (
                 f"RENAME_FILE is 'Y', but target filenames count ({len(raw_target_files)}) "
-                f"does not match valid .data source files count ({len(valid_requested_files)})."
+                f"does not match valid source files count ({len(valid_requested_files)})."
             )
             logger.error(msg)
             print(f"[Error] {msg}")
@@ -189,7 +196,8 @@ def copy_dataset_files():
                 print(f"[Warning] {msg}")
 
     if not files_to_copy:
-        msg = f"None of the specified '.data' files were found in '{source_dir_path}'."
+        extensions_str = ", ".join(ALLOWED_EXTENSIONS)
+        msg = f"None of the specified ({extensions_str}) files were found in '{source_dir_path}'."
         logger.error(msg)
         print(f"[Error] {msg}")
         sys.exit(1)
@@ -198,7 +206,7 @@ def copy_dataset_files():
     target_dir_path.mkdir(parents=True, exist_ok=True)
     logger.info(f"Target directory verified: {target_dir_path}")
 
-    print(f"\nFound {len(files_to_copy)} valid .data file(s) to process.\n")
+    print(f"\nFound {len(files_to_copy)} valid file(s) to process.\n")
     logger.info(f"Processing {len(files_to_copy)} file(s).")
 
     copied_count = 0
