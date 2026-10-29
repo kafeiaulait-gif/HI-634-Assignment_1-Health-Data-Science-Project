@@ -123,11 +123,6 @@
 * Prevent data leakage completely by strictly segregating all imputation, scaling, and validation tests within the training fold boundaries.
 * Deliver an easily auditable health data product that a grader can download and run with a single command line instruction.
 
-_Now that the whole master plan is explicitly laid out from scratch:_
-* Would you like me to help you draft the exact commands to type into your Windows terminal to get Phase 1 (installing Git and getting your folder ready) completed right now?
-* Do you have any questions about any specific step or term in this master checklist before you start?
-Tell me how you'd like to proceed and we can take the next step!
-
 
 <br><br>
 

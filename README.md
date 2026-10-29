@@ -3,7 +3,7 @@
 https://uab.instructure.com/courses/1691197/assignments/7676526
 
 
-Main Project stored in 
+## Main Project stored in folder formulation:
 
-..\project
+	..\project\..
 
