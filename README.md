@@ -7,3 +7,29 @@ https://uab.instructure.com/courses/1691197/assignments/7676526
 
 	..\project\..
 
+	
+---
+
+		The README gives the environment setup and exact command to rerun the analysis.
+	
+---
+
+## Environment Setup:
+
+
+
+---
+
+## Rerun Analysis Steps:
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
