@@ -1,0 +1,4 @@
+
+So I have a couple of last things.  First, is it possible to create one master file or folder, named automation, and basically take everything we've done so far and put it in the file / folder named automation?  Or is that too much.
+
+

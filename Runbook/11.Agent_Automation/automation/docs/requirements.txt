@@ -1,0 +1,16 @@
+# Core Data Science & Analysis
+pandas
+numpy
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine Learning
+scikit-learn
+
+# Notebook & Interactive Computing
+jupyter
+
+# UCI Machine Learning Repository API (for importing UCI datasets such as Heart Disease)
+ucimlrepo
