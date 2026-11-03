@@ -1,0 +1,12 @@
+Focused Research Question:
+"Can routine clinical examination and non-invasive diagnostic exercise measurements predict the presence (versus absence) of significant coronary artery disease (>50% angiographic vessel diameter stenosis) in adult patients evaluated for suspected cardiac pathology?"
+
+Problem Type:
+Supervised Binary Classification (Predicting a discrete diagnostic category: 0 = Absence of coronary artery disease, 1 = Presence of coronary artery disease).
+
+Unit of Observation:
+An individual adult patient clinical encounter / patient record (N = 303 unique patient records from the Cleveland Clinic Foundation).
+
+Informatics & Analytical Implications of the Unit of Observation:
+1. Record Linkage & Joins: Each row represents a single, independent patient encounter without repeated longitudinal visits or clustered sub-observations. Tables, diagnostic tests, and follow-up clinical data must be keyed at the unique patient encounter level.
+2. Clinical Interpretation: Model predictions and performance metrics (Sensitivity, Specificity, Positive Predictive Value) directly reflect individual diagnostic decision-making at the point of patient care, assessing whether a specific patient requires referral for invasive coronary angiography or can be safely managed with conservative therapy.
